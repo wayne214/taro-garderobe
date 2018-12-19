@@ -1,10 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-import './index.scss'
+// import './index.scss'
 
 export default class Index extends Component {
   config = {
-    navigationBarTitleText: '详情页'
+    navigationBarTitleText: '发现'
   }
 
   componentWillMount () {
@@ -28,7 +28,7 @@ export default class Index extends Component {
   render () {
     return (
       <View className='index2'>
-        <Text onClick={this.handleX}>2</Text>
+        <Text>发现</Text>
       </View>
     )
   }
