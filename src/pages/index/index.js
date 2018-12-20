@@ -6,19 +6,19 @@ import './index.scss'
 
 import * as Actions from '../../actions/counter'
 
-
-function mapStateToProps(state) {
-  return {
-    counter: state.counter.toJS()
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    ...bindActionCreators(Actions, dispatch)
-  }
-}
-@connect(mapStateToProps, mapDispatchToProps)
+//
+// function mapStateToProps(state) {
+//   return {
+//     counter: state.counter.toJS()
+//   }
+// }
+//
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     ...bindActionCreators(Actions, dispatch)
+//   }
+// }
+// @connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends Component {
 
   config = {
@@ -48,7 +48,7 @@ export default class Index extends Component {
         <Button className='add_btn' onClick={add}>+</Button>
         <Button className='dec_btn' onClick={minus}>-</Button>
         <Button className='dec_btn' onClick={asyncAdd}>async</Button>
-        <Text>{this.props.counter.num}</Text>
+        {/*<Text>{this.props.counter.num}</Text>*/}
         <Button onClick={this.goto}>走你</Button>
       </View>
     )

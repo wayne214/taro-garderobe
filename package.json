@@ -37,7 +37,8 @@
     "redux": "^4.0.1",
     "redux-immutablejs": "^0.0.8",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "polaris-common": "git+https://wayne214@bitbucket.org/dragosoft/polaris-common.git"
   },
   "devDependencies": {
     "@tarojs/plugin-babel": "^1.2.0",
