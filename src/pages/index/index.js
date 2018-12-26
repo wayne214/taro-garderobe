@@ -1,7 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Button, Image, Swiper, SwiperItem, ScrollView } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { AtAvatar } from 'taro-ui'
+import { AtAvatar,AtNoticebar,AtIcon } from 'taro-ui'
 import logo from '../../images/logo-wechat.png'
 import women from '../../images/women.jpeg'
 import man from '../../images/man.jpg'
@@ -37,11 +37,27 @@ class Index extends Component {
       url: `/pages/details/detail?type=${id}`
     })
   }
+
+  gotoShoppingCar = () => {
+    Taro.navigateTo({
+      url: '/pages/shoppingCar/shoppingCar'
+    })
+  }
+
+  goSearchPage = () => {
+    Taro.navigateTo({
+      url: '/pages/search/search'
+    })
+  }
   render () {
     const {add, minus} = this.props
     return (
       <View className='todo'>
-        {/*<Image src={logo} style={{alignSelf: 'center'}} />*/}
+        <View className='search-container'>
+          <Text className='search-text' onClick={this.goSearchPage}>搜索</Text>
+          <View className='search-line' onClick={this.goSearchPage} />
+          <AtIcon value='shopping-bag' size='20' color='#696969' onClick={this.gotoShoppingCar} />
+        </View>
         <ScrollView
           className='scrollview'
           scrollX='true'
@@ -62,6 +78,9 @@ class Index extends Component {
             })
           }
         </ScrollView>
+        <AtNoticebar marquee>
+          圣诞节服装品类上新了
+        </AtNoticebar>
         <Swiper
           className='test-h'
           indicatorColor='#999'
@@ -103,7 +122,6 @@ class Index extends Component {
           <Image mode='widthFix' src={child} className='swiper__item' onClick={this.goto.bind(this, '童装')} />
           <Image mode='widthFix' src={man} className='swiper__item' onClick={this.goto.bind(this, '男装')} />
         </ScrollView>
-        <Button onClick={this.goto.bind(this,'111')}>跳转详情页</Button>
       </View>
     )
   }

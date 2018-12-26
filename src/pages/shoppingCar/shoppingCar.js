@@ -2,9 +2,9 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 // import './index.scss'
 
-export default class mine extends Component {
+export default class shoppingCar extends Component {
   config = {
-    navigationBarTitleText: '我的'
+    navigationBarTitleText: '购物袋'
   }
 
   componentWillMount () {
@@ -28,7 +28,7 @@ export default class mine extends Component {
   render () {
     return (
       <View className='index2'>
-        <Text>我的</Text>
+        <Text>购物袋</Text>
       </View>
     )
   }

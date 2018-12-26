@@ -18,7 +18,9 @@ class App extends Component {
       'pages/index/index',
       'pages/discover/discover',
       'pages/mine/mine',
-      'pages/details/detail'
+      'pages/details/detail',
+      'pages/shoppingCar/shoppingCar',
+      'pages/search/search'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -34,20 +36,20 @@ class App extends Component {
       list: [{
         pagePath: 'pages/index/index',
         text: '首页',
-        // iconPath: './asset/images/index.png',
-        // selectedIconPath: './asset/images/index_focus.png'
+        iconPath: './images/tab/home.png',
+        selectedIconPath: './images/tab/home-active.png'
       },
         {
         pagePath: 'pages/discover/discover',
         text: '发现',
-        // iconPath: './asset/images/discovery.png',
-        // selectedIconPath: './asset/images/discovery_focus.png'
+        iconPath: './images/tab/cart.png',
+        selectedIconPath: './images/tab/cart-active.png'
       },
         {
           pagePath: 'pages/mine/mine',
           text: '我的',
-          // iconPath: './asset/images/burger.png',
-          // selectedIconPath: './asset/images/burger_focus.png'
+          iconPath: './images/tab/user.png',
+          selectedIconPath: './images/tab/user-active.png'
         }]
     }
   }
