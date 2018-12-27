@@ -1,78 +1,97 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text, Image } from '@tarojs/components'
-import { AtButton, AtActionSheet, AtActionSheetItem, AtIcon } from 'taro-ui'
-// import './index.scss'
-import women from '../../images/women.jpeg'
-import man from '../../images/man.jpg'
-import child from '../../images/child.jpg'
+import { View, Text, Image, Button } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+import * as detailApi from './service'
+import MySwiper from '../../components/MySwiper'
 
 import './detail.scss'
 
-const size=['XS(160/80A)','S(165/84A)','M(170/88A)','L(175/96A)','XL(175/100A)'];
+import shoppingcarSlice from "../../slices/shoppingcar";
 
-export default class detail extends Component {
+class detail extends Component {
   config = {
-    navigationBarTitleText: '详情页'
+    navigationBarTitleText: ''
   }
 
   constructor(props) {
     super(props)
-    console.log('参数', this.$router.params);
     this.state={
-      sheetState: false
+      banner: [],
+      detail: {},
     }
 
-  }
-
-  componentWillMount () {
-    console.log('参数', this.$router)
-    Taro.setNavigationBarTitle({title: this.$router.params.type})
   }
 
   componentDidMount () {
-    // console.log(this.$router.params)
-    // Taro.setNavigationBarTitle({title: this.$router.params.type})
+    detailApi.getProductInfo({
+      id: this.$router.params.id
+    }).then((res)=> {
+      console.log('物品详情',res)
+      const banner = res.data.image.map((item)=> {
+        return {
+          image_src: item
+        }
+      })
+      Taro.setNavigationBarTitle({
+        title: res.data.name
+      })
+      this.setState({
+        banner,
+        detail: res.data
+      })
+    })
+
   }
 
-  componentWillUnmout () { }
 
-  componentDidShow () { }
-
-  componentDidHide () { }
-
-  handleX = () => {
-    this.setState({
-      sheetState: true
-    })
+  handleClick = (value) => {
+    console.log(value)
+    this.props.dispatch(this.props.addToCar);
   }
 
   render () {
-    let imageUrl = '';
-    const type = this.$router.params.type;
-    if (type ==='女装') {
-      imageUrl = women
-    } else if (type === '男装') {
-      imageUrl = man
-    } else {
-      imageUrl = child
-    }
+    const {banner, detail } = this.state
     return (
-      <View className='index2'>
-        <Image mode='widthFix' src={imageUrl} className='header-image' />
-        <AtButton type='primary' size='normal' onClick={this.handleX}>添加</AtButton>
-        <AtActionSheet isOpened={this.state.sheetState}>
-          {
-            size.map((item)=> {
-              return <AtActionSheetItem key={item}>{
-                item
-              }</AtActionSheetItem>
-            })
-          }
-          <AtActionSheetItem>
-            查看我的尺码
-          </AtActionSheetItem>
-        </AtActionSheet>
+      <View className='detail-container'>
+        <View className='image-box-wrap'>
+          <View className='image-box clearfix'>
+            <MySwiper banner={banner} />
+            <View className='share-btn'>
+              <Button open-type='share' />
+            </View>
+          </View>
+
+        </View>
+
+        <View className='container'>
+          <View className='info-business-card'>
+            <View className='name'>{detail.brand}</View>
+            {
+              (detail.market_price / 100 > 500) && (
+                <View className='model'>
+                  参考价 ￥{detail.market_price / 100}
+                </View>
+              )
+            }
+          </View>
+
+          <View className='product-name'>
+            { detail.type_id == 2 && detail.mode_id == 1 && <View>VIP</View> }
+            {detail.name}
+          </View>
+        </View>
       </View>
     )
   }
 }
+function mapStateToProps(state) {
+  return {
+    shoppingSlice: state.shoppingSlice
+  }
+}
+
+const mapDispatchToProps = {
+  addToCar: shoppingcarSlice.actions.addToCar,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(detail)

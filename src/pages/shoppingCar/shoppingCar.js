@@ -1,8 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-// import './index.scss'
+import { connect } from '@tarojs/redux'
 
-export default class shoppingCar extends Component {
+class shoppingCar extends Component {
   config = {
     navigationBarTitleText: '购物袋'
   }
@@ -28,8 +28,14 @@ export default class shoppingCar extends Component {
   render () {
     return (
       <View className='index2'>
-        <Text>购物袋</Text>
+        <Text>购物数量{this.props.shoppingSlice}</Text>
       </View>
     )
   }
 }
+function mapStateToProps(state) {
+  return {
+    shoppingSlice: state.shoppingSlice
+  }
+}
+export default connect(mapStateToProps)(shoppingCar)

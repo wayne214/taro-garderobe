@@ -1,8 +1,70 @@
-.index {
-  color: black;
-}
+.detail-container {
+  padding-bottom: 120px;
+  background-color: #fff;
+  .image-box {
+    box-sizing: border-box;
+    padding: 0 25px;
+    height: 1052px;
+    position: relative;
+    overflow: hidden;
+    .share-btn {
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      z-index: 999;
+      width: 100px;
+      height: 100px;
+      background-image: url('http://static-r.msparis.com/uploads/f/8/f88a268b97504707e39104d00ca644fc.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      button {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+      }
+    }
+  }
 
-.header-image {
-  width: 100%;
-  height: 300px;
+  .container {
+    padding: 0 35px;
+    padding-top: 20px;
+    text-align: left;
+    background: #fff;
+    .info-business-card {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .name {
+        display: inline-block;
+        color: #333;
+        font-size: 34px;
+        line-height: 30px;
+        padding-right: 20px;
+        font-weight: bold;
+      }
+      .model {
+        display: inline-block;
+        color: #878787;
+        font-size: 28px;
+        line-height: 30px;
+      }
+    }
+    .product-name {
+      display: flex;
+      font-size: 36px;
+      color: #444;
+      view {
+        font-size: 27px;
+        color: #fff;
+        background-color: #D87182;
+        display: inline-block;
+        padding:3px 6px;
+        position: relative;
+        top: 4px;
+        margin-right: 10px;
+      }
+    }
+  }
 }

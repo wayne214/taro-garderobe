@@ -1,19 +1,18 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Button, Image, Swiper, SwiperItem, ScrollView } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
-import { AtAvatar,AtNoticebar,AtIcon } from 'taro-ui'
-import logo from '../../images/logo-wechat.png'
-import women from '../../images/women.jpeg'
-import man from '../../images/man.jpg'
-import child from '../../images/child.jpg'
+import { AtAvatar,AtNoticebar,AtIcon, AtGrid } from 'taro-ui'
+import GoodsList from '../../components/ProductList'
 
 
 import './index.scss'
 
 import counterSlice from '../../slices/counter';
 import userSlice from '../../slices/user';
+import shoppingcarSlice from '../../slices/shoppingcar';
 
-const data = ['man', 'woman', 'child', 'man', 'woman', 'child']
+import * as homeApi from './service'
+
 
 class Index extends Component {
 
@@ -21,9 +20,38 @@ class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
+  constructor(props) {
+    super(props)
+    this.state= {
+      banner: [],
+      brands: [],
+      products_list: [],
+      page: 1
+    }
+  }
   componentWillMount () { }
 
-  componentDidMount () { }
+  componentDidMount () {
+    homeApi.homepage({}).then((res)=> {
+      // console.log('banner', res.data);
+      // this.props.dispatch(addToCar(res.data))
+      this.setState({
+        banner: res.data.banner,
+        brands: res.data.brands,
+      })
+    })
+
+    homeApi.product({
+      page: 1,
+      mode: 1,
+      type: 0,
+      filter: 'sort:recomm|c:330602',}).then((res)=> {
+      console.log('products', res.data);
+        this.setState({
+          products_list: res.data.rows
+        })
+    })
+  }
 
   componentWillUnmount () { }
 
@@ -50,14 +78,32 @@ class Index extends Component {
     })
   }
   render () {
-    const {add, minus} = this.props
+    const {banner, brands, products_list} = this.state
     return (
       <View className='todo'>
-        <View className='search-container'>
-          <Text className='search-text' onClick={this.goSearchPage}>搜索</Text>
-          <View className='search-line' onClick={this.goSearchPage} />
-          <AtIcon value='shopping-bag' size='20' color='#696969' onClick={this.gotoShoppingCar} />
-        </View>
+        {/*<View className='search-container'>*/}
+          {/*<Text className='search-text' onClick={this.goSearchPage}>搜索</Text>*/}
+          {/*<View className='search-line' onClick={this.goSearchPage} />*/}
+          {/*<AtIcon value='shopping-bag' size='20' color='#696969' onClick={this.gotoShoppingCar} />*/}
+        {/*</View>*/}
+        <Swiper
+          className='test-h'
+          indicatorColor='#999'
+          indicatorActiveColor='#333'
+          vertical={false}
+          circular
+          indicatorDots
+          autoplays
+          style='width: 375px'
+        >
+          {
+            banner.map((item)=>{
+              return <SwiperItem key={item.id} style={{width:500}}>
+                <Image mode='widthFix' src={item.image_src} className='swiper__item' />
+              </SwiperItem>
+            })
+          }
+        </Swiper>
         <ScrollView
           className='scrollview'
           scrollX='true'
@@ -70,71 +116,28 @@ class Index extends Component {
           // onScroll={this.onScroll}
         >
           {
-            data.map((item, index)=> {
-              return <View key={item} className='header-icon-container' >
-                <AtAvatar circle image='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1545648401672&di=3880532945498a8f658f72edb0ac35cf&imgtype=0&src=http%3A%2F%2Fwenwen.soso.com%2Fp%2F20140615%2F20140615162949-1286630361.jpg' size='large' />
-                <Text className='header-title'>{item}</Text>
+            brands.map((item)=> {
+              return <View key={item.id} className='header-icon-container' >
+                <AtAvatar circle image={item.image_src} size='large' />
               </View>
             })
           }
         </ScrollView>
-        <AtNoticebar marquee>
-          圣诞节服装品类上新了
-        </AtNoticebar>
-        <Swiper
-          className='test-h'
-          indicatorColor='#999'
-          indicatorActiveColor='#333'
-          vertical={false}
-          circular
-          indicatorDots
-          autoplay
-          style='width: 375px'
-        >
-            <SwiperItem style={{width:500}}>
-              <Image mode='widthFix' src={women} className='swiper__item'
-                onClick={this.goto.bind(this, '女装')}
-              />
-            </SwiperItem>
-            <SwiperItem>
-              <Image mode='widthFix' src={child} className='swiper__item'
-                onClick={this.goto.bind(this, '童装')}
-              />
-            </SwiperItem>
-            <SwiperItem>
-              <Image mode='widthFix' src={man} className='swiper__item'
-                onClick={this.goto.bind(this, '男装')}
-              />
-            </SwiperItem>
-        </Swiper>
-        <ScrollView
-          className='scrollview-bottom'
-          scrollY
-          scrollWithAnimation
-          scrollTop='0'
-          style='height: 100%; margin-top: 10px'
-          lowerThreshold='20'
-          upperThreshold='20'
-          // onScrolltoupper={this.onScrolltoupper}
-          // onScroll={this.onScroll}
-        >
-          <Image mode='widthFix' src={women} className='swiper__item' onClick={this.goto.bind(this, '女装')} />
-          <Image mode='widthFix' src={child} className='swiper__item' onClick={this.goto.bind(this, '童装')} />
-          <Image mode='widthFix' src={man} className='swiper__item' onClick={this.goto.bind(this, '男装')} />
-        </ScrollView>
+
+        <View className='recommend'>好物推荐</View>
+        <GoodsList list={products_list} />
       </View>
     )
   }
 }
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    shoppingcarSlice: state.shoppingcarSlice
   }
 }
 
 const mapDispatchToProps = {
-    add: counterSlice.actions.increment,
-    minus: counterSlice.actions.decrement
+  addToCar: shoppingcarSlice.actions.addToCar
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)

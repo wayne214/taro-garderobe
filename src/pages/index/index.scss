@@ -24,6 +24,7 @@
 .scrollview {
   flex-direction: row;
   white-space: nowrap;
+  margin-bottom: 40px;
 }
 .swiper__item {
   width: 100%;
@@ -48,4 +49,12 @@
   font-size: 30px;
   text-align: center;
   display: block;
+}
+
+.recommend {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+  font-size: 36px;
 }
