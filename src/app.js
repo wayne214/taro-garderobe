@@ -16,11 +16,12 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
-      'pages/discover/discover',
+      'pages/cart/index',
       'pages/mine/mine',
       'pages/details/detail',
       'pages/shoppingCar/shoppingCar',
-      'pages/search/search'
+      'pages/search/search',
+      'pages/size/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -40,8 +41,8 @@ class App extends Component {
         selectedIconPath: './images/tab/home-active.png'
       },
         {
-        pagePath: 'pages/discover/discover',
-        text: '发现',
+        pagePath: 'pages/cart/index',
+        text: '衣袋',
         iconPath: './images/tab/cart.png',
         selectedIconPath: './images/tab/cart-active.png'
       },
