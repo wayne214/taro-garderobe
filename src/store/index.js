@@ -3,7 +3,7 @@ import { configureStore, getDefaultMiddleware, createSlice, combineReducers } fr
 // We'll use redux-logger just as an example of adding another middleware
 import logger from 'redux-logger'
 
-import counterSlice from '../slices/counter'
+import cartSlice from '../slices/cart'
 import userSlice from '../slices/user'
 import shoppingcarSlice from '../slices/shoppingcar'
 
@@ -11,7 +11,7 @@ import shoppingcarSlice from '../slices/shoppingcar'
 const middleware = [...getDefaultMiddleware(), logger]
 
 const reducer = combineReducers({
-  counter: counterSlice.reducer,
+  cart: cartSlice.reducer,
   user: userSlice.reducer,
   shoppingSlice: shoppingcarSlice.reducer
 })

@@ -6,7 +6,7 @@ import MySwiper from '../../components/MySwiper'
 
 import './detail.scss'
 
-import shoppingcarSlice from "../../slices/shoppingcar";
+import cartSlice from "../../slices/cart";
 
 class detail extends Component {
   config = {
@@ -98,8 +98,58 @@ class detail extends Component {
       })
     }
   }
+
+  join = () => {
+    if (this.state.detail.mode_id == 3 && (this.state.detail.enabled != 1 || this.state.detail.sale_stock == 0)) {
+      Taro.showToast({
+        title: '商品已售罄',
+        icon: 'none',
+      });
+      return;
+    }
+    if (this.state.currentChooseId === '') {
+      Taro.showToast({
+        title: '请选择尺码',
+        icon: 'none',
+      });
+      return;
+    }
+
+    if (this.state.detail.enabled === 1) {
+      const { detail, currentChooseId, currentChooseName } = this.state;
+      for (let item of this.props.items) {
+        if (item.product_id == detail.product_master_id) {
+          Taro.showToast({
+            title: '衣袋已存在该美衣~~',
+            icon: 'none',
+          });
+          return;
+        }
+      }
+      this.props.dispatch({
+        type: 'cart/save',
+        payload: {
+          items: [...this.props.items, {
+            brand: detail.brand,
+            images: detail.image[0],
+            name: detail.name,
+            product_id: detail.product_master_id,
+            product_price: detail.market_price,
+            specification: currentChooseName,
+            spu: currentChooseId,
+            type: detail.type_id,
+          }]
+        },
+      })
+      Taro.showToast({
+        title: '加入衣袋成功'
+      })
+    }
+  }
   render () {
     const {banner, detail, specificationsList, currentChooseId } = this.state
+    const {items} = this.props
+    console.log('item', items); 
     return (
       <View className='detail-container'>
         <View className='image-box-wrap'>
@@ -153,10 +203,10 @@ class detail extends Component {
                               </View>
                             ): (
                               <View className={this.computedStyle(item)} data-has_stock={item.has_stock} data-id={item.id} data-name={item.name} onClick={this.chooseSize}>
-                                <View className="double">
+                                <View className='double'>
                                   {`${spe.name}${item.name}号`}
                                 </View>
-                                <View className="double font">
+                                <View className='double font'>
                                   {`中码${item.value}号`}
                                 </View>
                               </View>
@@ -193,7 +243,7 @@ class detail extends Component {
           <View className='nav' data-url='/pages/cart/index' onClick={this.goToPage}>
             <Image className='nav-img' src={require('../../images/tab/cart.png')} alt='' />
             衣袋
-            {/*{ items.length > 0 && <View className='zan-badge__count'>{items.length}</View> }*/}
+            { items.length > 0 && <View className='zan-badge__count'>{items.length}</View> }
           </View>
           <View className={currentChooseId == '' ? 'join join-disabled' : 'join'} onClick={this.join}>加入衣袋</View>
         </View>
@@ -203,12 +253,12 @@ class detail extends Component {
 }
 function mapStateToProps(state) {
   return {
-    shoppingSlice: state.shoppingSlice
+    items: state.cart.items
   }
 }
 
 const mapDispatchToProps = {
-  addToCar: shoppingcarSlice.actions.addToCar,
+  save: cartSlice.actions.save,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(detail)

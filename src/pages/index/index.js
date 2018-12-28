@@ -7,8 +7,6 @@ import GoodsList from '../../components/ProductList'
 
 import './index.scss'
 
-import counterSlice from '../../slices/counter';
-import userSlice from '../../slices/user';
 import shoppingcarSlice from '../../slices/shoppingcar';
 
 import * as homeApi from './service'
@@ -32,6 +30,7 @@ class Index extends Component {
   componentWillMount () { }
 
   componentDidMount () {
+    // Taro.clearStorage();
     homeApi.homepage({}).then((res)=> {
       // console.log('banner', res.data);
       // this.props.dispatch(addToCar(res.data))
@@ -136,8 +135,6 @@ function mapStateToProps(state) {
   }
 }
 
-const mapDispatchToProps = {
-  addToCar: shoppingcarSlice.actions.addToCar
-  };
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
