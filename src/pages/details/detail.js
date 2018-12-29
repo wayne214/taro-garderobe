@@ -26,9 +26,13 @@ class detail extends Component {
   }
 
   componentDidMount () {
+    Taro.showLoading({
+      title: '加载中'
+    })
     detailApi.getProductInfo({
       id: this.$router.params.id
     }).then((res)=> {
+      Taro.hideLoading()
       console.log('物品详情',res)
       const banner = res.data.image.map((item)=> {
         return {
@@ -149,7 +153,7 @@ class detail extends Component {
   render () {
     const {banner, detail, specificationsList, currentChooseId } = this.state
     const {items} = this.props
-    console.log('item', items); 
+    console.log('item', items);
     return (
       <View className='detail-container'>
         <View className='image-box-wrap'>
@@ -232,7 +236,7 @@ class detail extends Component {
 
         {/*// 底部操作栏*/}
         <View className='detail-bottom-btns'>
-          <View className='nav' data-url='/pages/home/index' onClick={this.goToPage}>
+          <View className='nav' data-url='/pages/index/index' onClick={this.goToPage}>
             <Image className='nav-img' src={require('../../images/tab/home.png')} alt='' />
             首页
           </View>

@@ -20,6 +20,7 @@ class Index extends Component {
 
   constructor(props) {
     super(props)
+
     this.state= {
       banner: [],
       brands: [],
@@ -27,13 +28,33 @@ class Index extends Component {
       page: 1
     }
   }
-  componentWillMount () { }
+
+  onReachBottom () {
+    this.setState({
+      page: this.state.page + 1
+    }, ()=> {
+      homeApi.product({
+        page: this.state.page,
+        mode: 1,
+        type: 0,
+        filter: 'sort:recomm|c:330602',}).then((res)=> {
+        const list = this.state.products_list;
+        const newList = list.concat(res.data.rows)
+        this.setState({
+          products_list: newList
+        })
+      })
+    })
+
+  }
 
   componentDidMount () {
-    // Taro.clearStorage();
+
+    Taro.showLoading({
+      title: '加载中'
+    })
     homeApi.homepage({}).then((res)=> {
-      // console.log('banner', res.data);
-      // this.props.dispatch(addToCar(res.data))
+      Taro.hideLoading()
       this.setState({
         banner: res.data.banner,
         brands: res.data.brands,
@@ -45,18 +66,11 @@ class Index extends Component {
       mode: 1,
       type: 0,
       filter: 'sort:recomm|c:330602',}).then((res)=> {
-      console.log('products', res.data);
         this.setState({
           products_list: res.data.rows
         })
     })
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
 
   goto =(id) =>{
     console.log('type', id);
@@ -122,6 +136,8 @@ class Index extends Component {
             })
           }
         </ScrollView>
+        {/* 流量主广告 */}
+        {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ad unit-id="adunit-dc1c0a38156fa412"></ad>}
 
         <View className='recommend'>好物推荐</View>
         <GoodsList list={products_list} />
