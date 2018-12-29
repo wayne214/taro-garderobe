@@ -17,11 +17,13 @@ class App extends Component {
     pages: [
       'pages/index/index',
       'pages/cart/index',
-      'pages/mine/mine',
+      'pages/mine/index',
       'pages/details/detail',
       'pages/shoppingCar/shoppingCar',
       'pages/search/search',
-      'pages/size/index'
+      'pages/size/index',
+      'pages/order/index',
+      'pages/login/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -47,7 +49,7 @@ class App extends Component {
         selectedIconPath: './images/tab/cart-active.png'
       },
         {
-          pagePath: 'pages/mine/mine',
+          pagePath: 'pages/mine/index',
           text: '我的',
           iconPath: './images/tab/user.png',
           selectedIconPath: './images/tab/user-active.png'
