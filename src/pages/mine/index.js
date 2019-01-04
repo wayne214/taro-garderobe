@@ -25,30 +25,15 @@ class index extends Component {
     })
   }
 
-  goto = (e) => {
-    console.log('e',e.currentTarget.dataset)
-    const url = e.currentTarget.dataset.url
-
-    Taro.navigateTo({
-      url
-    })
-  }
-
-  gotoLogin = (e) => {
-    const url = e.currentTarget.dataset.url
-    Taro.navigateTo({
-      url
-    })
-  }
   render () {
     const {list, infoList} = this.props;
     return (
       <View className='user-page'>
-        <View className='header-container' data-url='/pages/login/index' onClick={this.gotoLogin}>
+        <View className='header-container' data-url='/pages/login/index' onClick={this.goToPage}>
           <View className='left-info'>
             <View className='name'>{'请登录>'}</View>
             <View className='msg-container' >
-              <View className='msg'>
+              <View className='msg' data-url='/pages/message/index' onClick={this.goToPage}>
                 <Image mode='widthFix' src={message_img} />
               </View>
               <View className='msg'>
@@ -88,7 +73,7 @@ class index extends Component {
                 key={item.type}
                 iconUrl={item.icon}
                 url={item.url}
-                onClick={this.goto}
+                onClick={this.goToPage}
                 content={item.content}
               />
             ))
