@@ -67,7 +67,7 @@ class index extends Component {
             list && list.map((item)=>(
               <View className='item' key={item.type} data-url={`/pages/order/index?type=${index}`} onClick={this.goToPage}>
                 <Image src={item.img} mode='widthFix' />
-                <Text>{item.txt}</Text>
+                <Text>{item.title}</Text>
               </View>
             ))
           }
