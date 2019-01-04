@@ -27,6 +27,11 @@ class index extends Component {
 
   goto = (e) => {
     console.log('e',e.currentTarget.dataset)
+    const url = e.currentTarget.dataset.url
+
+    Taro.navigateTo({
+      url
+    })
   }
 
   gotoLogin = (e) => {
