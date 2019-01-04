@@ -76,7 +76,7 @@ class index extends Component {
         <View className='card'>
           <View className='type type0'>
             <View className='operation'>
-              <View className='txt'>{'您还不是会员'}</View>
+              <View className='txt'>您还不是会员</View>
             </View>
           </View>
         </View>
