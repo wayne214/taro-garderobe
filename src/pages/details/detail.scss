@@ -142,7 +142,37 @@
       }
     }
 
-
+    .goods-info {
+      .chapter-head {
+        font-size: 36px;
+        margin:50px 0 20px 0;
+        .icon {
+          width: 36px;
+          height: 36px;
+          position: relative;
+          top: 4px;
+        }
+      }
+      .introduce {
+        height: 90px;
+        line-height: 90px;
+        border: 1px solid #ddd;
+        font-size: 32px;
+        padding: 0 30px;
+        margin-bottom: 24px;
+        justify-content: space-between;
+        .b {
+          font-weight: bold;
+        }
+      }
+      .light {
+        color: #888888;
+        width: 680px;
+        white-space: pre-wrap;
+        word-break: break-all;
+        line-height: 36px;
+      }
+    }
 
   }
 
@@ -209,4 +239,6 @@
     box-shadow: 0 0 0 2px #fff;
     box-sizing: border-box;
   }
+
+
 }

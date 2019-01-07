@@ -225,14 +225,41 @@ class detail extends Component {
               })
             }
           </View>
-
+          {/* 尺码转换表 */}
           <View className='product-size-line' onClick={this.openSizeTable}>
             <View className='clearfix'>
               <View className='icon-tag' />
               <View className='text'>各国尺码转换表</View>
             </View>
           </View>
+
+
+          {/* 品牌介绍 */}
+          {
+            detail.brand && detail.brand != null && (
+              <View className='goods-info'>
+                <View className='chapter-head'>品牌故事</View>
+                <View className='introduce'>
+                  <View className='b'>{detail.brand}</View>
+                  { /*  <image src="{{detail.brand_logo}}"  alt="" /> */}
+                  {/*<View className="iconfont icon-more" />*/}
+                </View>
+                {
+                  detail.brand_desc != null && (
+                    <View className='light'>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      {
+                        detail.brand_desc
+                      }
+                    </View>
+                  )
+                }
+              </View>
+            )
+          }
+
         </View>
+
 
         {/*// 底部操作栏*/}
         <View className='detail-bottom-btns'>
