@@ -20,6 +20,7 @@ class index extends Component {
   }
   goToPage = (e) => {
     const url = e.currentTarget.dataset.url
+    console.log(url)
     Taro.navigateTo({
       url
     })

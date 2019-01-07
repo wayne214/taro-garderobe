@@ -62,11 +62,27 @@ const user = createSlice({
         type: 'about',
         url: '/pages/about/index'
       }
-    ]
+    ],
+    mobile: '',
+    code: '',
+    sending: 0,
+    errorMessage: '',
+    smsTime: 30
   },
   reducers: {
     setUserName: (state, action) => {
       state.name = action.payload // mutate the state all you want with immer
+    },
+    saveMobile: (state, action) => {
+      state.mobile = action.payload.mobile
+    },
+    saveCode: (state, action) => {
+      state.code = action.payload.code
+    },
+    saveStatus: (state, action) => {
+      state.sending = action.payload.sending,
+      state.errorMessage = action.payload.errorMessage,
+      state.smsTime = action.payload.smsTime
     }
   }
 })
