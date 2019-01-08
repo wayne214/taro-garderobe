@@ -23,6 +23,9 @@ class index extends Component {
 
   }
 
+  componentWillUnmount() {
+    clearInterval(setIntervalTime)
+  }
   // tips
   showToast(text) {
     Taro.showToast({
@@ -42,7 +45,33 @@ class index extends Component {
     }).then((res)=> {
       console.log('res',res);
       if (res.status === 'ok') {
+        const userInfo = {
+          access_token: res.data.access_token,
+          invitation_code: res.data.invitation_code,
+          mobile: res.data.mobile,
+          nickname: res.data.nickname,
+          new_user: res.data.new_user,
+          is_has_buy_card: res.data.is_has_buy_card,
+          erroMessage: '',
+          code: ''
+        };
 
+        Taro.setStorageSync('user_info', userInfo);
+        Taro.setStorageSync('access_token', res.data.access_token);
+
+        this.props.dispatch({
+          type: 'user/saveUserInfo',
+          payload: userInfo
+        })
+
+        Taro.showToast({
+          title: '登录成功，欢迎回来～～～',
+          icon: 'none',
+        });
+
+        setTimeout(() => {
+          Taro.navigateBack();
+        }, 1000);
       } else {
         this.showToast(res.error.message)
       }

@@ -126,6 +126,19 @@
             margin-right: 10px;
           }
         }
+        .btn {
+          width: 210px;
+          height: 66px;
+          display: flex;
+          align-items: center;
+          border-radius: 100px;
+          background: #FFFFFF;
+          font-size: 26px;
+          color: #E2868B;
+          padding-left: 36px;
+          margin-top: 10px;
+          box-sizing: border-box;
+        }
       }
     }
   }
