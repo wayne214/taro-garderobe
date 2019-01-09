@@ -86,11 +86,18 @@ class index extends Component {
   }
 
   getVoiceCode = (event) => {
-    const value = event.target.value;
-    // this.props.dispatch({
-    //   type: 'user/saveMobile',
-    //   payload: {mobile: value}
-    // })
+    const mobile = this.props.mobile
+    if (mobile === '' || mobile.length !== 11){
+      this.showToast('请输入有效的手机号!')
+      return false
+    }
+
+    LoginApi.getSmsVoice({
+      mobile
+    }).then(()=> {
+
+    })
+
   }
 
   sendSms = () => {
@@ -200,10 +207,10 @@ class index extends Component {
           </View>
 
           <Button className='button' onClick={this.login}>登录</Button>
-          <View className='see-des' onClick={this.getVoiceCode}>
-            收不到短信？
-            <Text>使用语音验证码</Text>
-          </View>
+          {/*<View className='see-des' onClick={this.getVoiceCode}>*/}
+            {/*收不到短信？*/}
+            {/*<Text>使用语音验证码</Text>*/}
+          {/*</View>*/}
         </View>
 
       </View>

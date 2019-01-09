@@ -73,7 +73,8 @@ const user = createSlice({
     invitation_code: '',
     nickname: '',
     new_user: '',
-    is_has_buy_card: ''
+    is_has_buy_card: '',
+    addressList: []
   },
   reducers: {
     setUserName: (state, action) => {
@@ -91,7 +92,7 @@ const user = createSlice({
       state.smsTime = action.payload.smsTime
     },
     saveUserInfo: (state, action) => {
-      console.log('用户信息', action.payload)
+      // console.log('用户信息', action.payload)
       state.access_token = action.payload.access_token,
       state.invitation_code = action.payload.invitation_code,
       state.nickname = action.payload.nickname,
@@ -99,7 +100,9 @@ const user = createSlice({
       state.errorMessage = action.payload.errorMessage,
       state.code = action.payload.code,
       state.mobile = action.payload.mobile
-
+    },
+    saveAddressList: (state, action) => {
+      state.addressList = action.payload.addressList
     }
   }
 })

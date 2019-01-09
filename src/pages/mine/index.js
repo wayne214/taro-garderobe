@@ -62,6 +62,19 @@ class index extends Component {
         Taro.removeStorageSync('user_info');
         Taro.removeStorageSync('access_token');
 
+        // 删除衣袋中的项目
+        this.props.dispatch({
+          type: 'cart/save',
+          payload: {
+            items: []
+          },
+        })
+
+        Taro.removeStorageSync('items');
+        Taro.removeTabBarBadge({
+          index: 1,
+        })
+
         const userInfo = {
           access_token: '',
           invitation_code: '',
