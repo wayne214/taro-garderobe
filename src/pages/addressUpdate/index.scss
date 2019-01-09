@@ -1,57 +1,14 @@
-.addressList-page {
+.addressUpdate-page {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  background: white;
   box-sizing: border-box;
-  padding-bottom: 170px;
+  padding: 60px;
 
-  .content {
-    display: flex;
-    .info {
-      padding-left: 50px;
-      width: 80%;
-      font-size: 28px;
-      white-space: normal;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      .contact {
-        margin-bottom: 10px;
-        .name {
-          font-size: 30px;
-          font-weight: bold;
-          margin-right: 20px;
-        }
-      }
-    }
+  .head {
+    font-size: 50px;
+    color: #444;
+    margin-bottom: 64px;
   }
 
-  .add {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 120px;
-    font-size: 35px;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #EC5D75;
-    image, taro-img {
-      width: 35px;
-      height: 35px;
-      display: inline-block;
-      margin-right: 6px;
-    }
-  }
-
-  .empty-address {
-    width: 100%;
-    height: 50%;
-    position: absolute;
-    top: 40%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
