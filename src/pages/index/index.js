@@ -25,7 +25,8 @@ class Index extends Component {
       banner: [],
       brands: [],
       products_list: [],
-      page: 1
+      page: 1,
+      showFlag: false
     }
   }
 
@@ -58,6 +59,7 @@ class Index extends Component {
       this.setState({
         banner: res.data.banner,
         brands: res.data.brands,
+        showFlag: true
       })
     })
 
@@ -90,6 +92,13 @@ class Index extends Component {
       url: '/pages/search/search'
     })
   }
+
+  gotoNewsPage = (e) => {
+    console.log('bannerClick',e)
+    // Taro.navigateTo({
+    //   url: '/pages/news/index?id=' + e
+    // })
+  }
   render () {
     const {banner, brands, products_list} = this.state
     return (
@@ -111,7 +120,12 @@ class Index extends Component {
         >
           {
             banner.map((item)=>{
-              return <SwiperItem key={item.id} style={{width:500}}>
+              return <SwiperItem
+                key={item.id}
+                style={{width:500}}
+                // data-url={item}
+                onClick={this.gotoNewsPage.bind(this, item.value1)}
+              >
                 <Image mode='widthFix' src={item.image_src} className='swiper__item' />
               </SwiperItem>
             })
@@ -139,7 +153,9 @@ class Index extends Component {
         {/* 流量主广告 */}
         {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ad unit-id="adunit-dc1c0a38156fa412"></ad>}
 
-        <View className='recommend'>好物推荐</View>
+        {
+          this.state.showFlag && <View className='recommend'>好物推荐</View>
+        }
         <GoodsList list={products_list} />
       </View>
     )

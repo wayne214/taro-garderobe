@@ -100,7 +100,7 @@ class index extends Component {
           </View>
 
           <View className='avatar-container'>
-            <Image mode='widthFix' className='avatar' src={avatar_img} />
+            <Image mode='widthFix' className='avatar' src={mobile ? 'http://static-r.msparis.com/uploads/stars/5/b/5b10a7695ba3dd870d4e4b75cc50e741.jpg' : avatar_img} />
           </View>
         </View>
 

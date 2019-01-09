@@ -27,7 +27,8 @@ class App extends Component {
       'pages/login/index',
       'pages/about/index',
       'pages/addressList/index',
-      'pages/couponList/index'
+      'pages/couponList/index',
+      'pages/news/index'
     ],
     window: {
       backgroundTextStyle: 'light',
