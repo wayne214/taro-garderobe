@@ -233,6 +233,48 @@ class detail extends Component {
             </View>
           </View>
 
+          {/* 流量主广告 */}
+          {/*{Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ad unit-id="adunit-8b7bfc0fa927b307"></ad>}*/}
+
+          {/*优质评价*/}
+          <View className='goods-info'>
+            <View className='chapter-head'>
+              优质评价（
+              {detail.comments && detail.comments.total}
+              ）
+            </View>
+            {detail.comments && detail.comments.total == 0 &&
+              <View className='text-center'>---- 暂无优质评价 ----</View>
+            }
+            {
+              detail.comments && detail.comments.rows
+              && detail.comments.rows.map((item,index)=>(
+                <View className='fj' key={index}>
+                  <Image src={item.user_pic} alt='' className='fj-img' />
+                  <View>
+                    <View className='fj-name font26'>{item.nickname}</View>
+                    <View className='fj-tag'>
+                      {item.fit_text}
+                    </View>
+                    <View className='fj-info'>{item.comment}</View>
+                    <View className='comment-img'>
+                      {
+                        item.images && item.images.map((subItem, subIndex) => (
+                          <Image
+                            src={subItem.image_url}
+                            key={subIndex}
+                            className='goods-img'
+                            mode='widthFix'
+                          />
+                        ))
+                      }
+                    </View>
+
+                  </View>
+                </View>
+              ))
+            }
+          </View>
 
           {/* 品牌介绍 */}
           {
@@ -258,6 +300,33 @@ class detail extends Component {
             )
           }
 
+          {/* 服务说明 */}
+          <View className='goods-info'>
+            <View className='chapter-head'>
+              服务说明
+            </View>
+            <View className='server-ul'>
+              <View className='server-list'>
+                <Image mode='widthFix' src='http://static-r.msparis.com/uploads/d/6/d646e479e328e9f370462b51fb841e70.png' alt='' />
+                <View>每次4件</View>
+                <View>无限换穿</View>
+              </View>
+
+              <View className='server-list'>
+                <Image mode='widthFix' src='http://static-r.msparis.com/uploads/1/3/137d9963d13a053a6a81784af1256aa9.png' alt='' />
+                <View>五星洗护</View>
+                <View>往返包邮</View>
+              </View>
+
+              <View className='server-list'>
+                <Image mode='widthFix' src='http://static-r.msparis.com/uploads/c/0/c0367921e38cc7fd33f63897b18a86ef.png' alt='' />
+                <View>APP一键还衣</View>
+                <View>快递上门</View>
+              </View>
+            </View>
+          </View>
+
+
         </View>
 
 
@@ -278,6 +347,7 @@ class detail extends Component {
           </View>
           <View className={currentChooseId == '' ? 'join join-disabled' : 'join'} onClick={this.join}>加入衣袋</View>
         </View>
+
       </View>
     )
   }
