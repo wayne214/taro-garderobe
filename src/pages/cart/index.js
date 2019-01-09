@@ -10,7 +10,7 @@ class Cart extends Component {
     navigationBarTitleText: '衣袋'
   }
 
-  componentDidMount () {
+  componentDidShow () {
     console.log(this.props.items)
     // 设置小红点
     if (this.props.items.length > 0) {
