@@ -57,18 +57,18 @@ class index extends Component {
                     <View className='detail'>{item.address_detail}</View>
                   </View>
                 </View>
-                {/*<View*/}
-                  {/*className='edit'*/}
-                  {/*data-id={item.id}*/}
-                  {/*data-region_code={item.region_code}*/}
-                  {/*data-region_name={item.region_name}*/}
-                  {/*data-contact_name={item.contact_name}*/}
-                  {/*data-contact_mobile={item.contact_mobile}*/}
-                  {/*data-address_detail={item.address_detail}*/}
-                  {/*onClick={this.addressEdit}*/}
-                {/*>*/}
-                  {/*<Image mode='widthFix' src='http://static-r.msparis.com/uploads/9/1/91d94589817e388f6c2d641f34d99b2f.png' />*/}
-                {/*</View>*/}
+                <View
+                  className='edit'
+                  data-id={item.id}
+                  data-region_code={item.region_code}
+                  data-region_name={item.region_name}
+                  data-contact_name={item.contact_name}
+                  data-contact_mobile={item.contact_mobile}
+                  data-address_detail={item.address_detail}
+                  onClick={this.addressEdit}
+                >
+                  <Image mode='widthFix' src='http://static-r.msparis.com/uploads/9/1/91d94589817e388f6c2d641f34d99b2f.png' />
+                </View>
               </View>
             ))
           ) : (
@@ -78,10 +78,10 @@ class index extends Component {
           )
         }
 
-        {/*<View className='add' onClick={this.addressUpdate}>*/}
-          {/*<Image mode='widthFix' src={require('../../images/icon/add.png')} />*/}
-          {/*<Text>添加地址</Text>*/}
-        {/*</View>*/}
+        <View className='add' onClick={this.addressUpdate}>
+          <Image mode='widthFix' src={require('../../images/icon/add.png')} />
+          <Text>添加地址</Text>
+        </View>
       </View>
     )
   }
