@@ -117,12 +117,13 @@ class index extends Component {
     console.log('input-event', event.target)
     this.props.dispatch({
       type: 'address/saveInput',
-      payload: { [id]: value },
+      payload: { id,value },
     });
   }
 
   submit = () => {
     const { showValue, contact_name, contact_mobile, address_detail, access_token } = this.props;
+    console.log(this.props)
     console.log('address_detail',address_detail)
     if (contact_name === '') {
       Taro.showToast({
@@ -156,14 +157,20 @@ class index extends Component {
 
     AddressApi.updateAddress({
       access_token,
-      id: '',
+      id: undefined,
       region_code: showValue.region_code,
       region_name: showValue.region_name,
       contact_name,
       contact_mobile,
       address_detail
     }).then(res => {
-      console.log(res);
+      Taro.showToast({
+        title: '保存成功',
+        icon: 'none',
+      });
+      setTimeout(()=>{
+        Taro.navigateBack();
+      },1000);
     })
   }
   render() {

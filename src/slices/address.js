@@ -60,9 +60,24 @@ const cart = createSlice({
       state.showValue = action.payload.showValue
     },
     saveInput: (state, action) => {
-      state.contact_name = action.payload.contact_name,
-      state.contact_mobile = action.payload.contact_mobile,
-      state.address_detail = action.payload.address_detail
+      const payload = action.payload
+      if (payload.id === 'contact_name') {
+        state.contact_name = action.payload.value
+      }
+
+      if (payload.id === 'contact_mobile') {
+        state.contact_mobile = action.payload.value
+      }
+      if (payload.id === 'address_detail') {
+        state.address_detail = action.payload.value
+      }
+    },
+    save: (state, action) => {
+        state.addressId = action.payload.addressId
+        state.showValue = action.payload.showValue
+        state.contact_name = action.payload.contact_name
+        state.contact_mobile = action.payload.contact_mobile
+        state.address_detail = action.payload.address_detail
     }
   }
 })

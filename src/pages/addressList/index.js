@@ -34,7 +34,21 @@ class index extends Component {
     })
   }
   // 编辑地址
-  addressEdit = () => {
+  addressEdit = (e) => {
+    const { id, region_code, region_name, contact_name, contact_mobile, address_detail } = e.currentTarget.dataset;
+    this.props.dispatch({
+      type: 'address/save',
+      payload: {
+        addressId: id,
+        showValue: {
+          region_code,
+          region_name,
+        },
+        contact_name,
+        contact_mobile,
+        address_detail,
+      },
+    })
     Taro.navigateTo({
       url: '/pages/addressUpdate/index'
     })
@@ -90,6 +104,15 @@ function mapStateToProps(state) {
   return {
     access_token: state.user.access_token,
     addressList: state.user.addressList,
+    addressId: state.address.addressId,
+    cities: state.address.cities,
+    districts: state.address.districts,
+    pickerValue: state.address.pickerValue,
+    showValue: state.address.showValue,
+    contact_name: state.address.contact_name,
+    contact_mobile: state.address.contact_mobile,
+    address_detail: state.address.address_detail,
+    currentIndex: state.address.currentIndex,
   }
 }
 
