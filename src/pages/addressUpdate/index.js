@@ -164,14 +164,44 @@ class index extends Component {
       contact_mobile,
       address_detail
     }).then(res => {
-      Taro.showToast({
-        title: '保存成功',
-        icon: 'none',
-      });
-      setTimeout(()=>{
-        Taro.navigateBack();
-      },1000);
+      if (res.status === 'ok') {
+        Taro.showToast({
+          title: '保存成功',
+          icon: 'none',
+        });
+        Taro.eventCenter.trigger('refreshAddressLis')
+        setTimeout(()=>{
+          Taro.navigateBack();
+        },1000);
+      }
+
     })
+  }
+
+  delete = () => {
+    const {addressId, access_token} = this.props
+    Taro.showModal({
+      content: '是否删除该地址?'
+    })
+      .then(res => {
+        if (res.confirm) {
+          AddressApi.removeAddress({
+            id: addressId,
+            access_token
+          }).then(result => {
+            if (result.status === 'ok') {
+              Taro.showToast({
+                title: '删除成功',
+                icon: 'none',
+              });
+              Taro.eventCenter.trigger('refreshAddressLis')
+              setTimeout(()=>{
+                Taro.navigateBack();
+              },1000);
+            }
+          })
+        }
+      })
   }
   render() {
     const { addressId, districts, pickerValue, showValue, contact_name, contact_mobile, address_detail } = this.props;

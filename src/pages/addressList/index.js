@@ -11,12 +11,19 @@ class index extends Component {
   };
 
   componentDidMount = () => {
+    Taro.eventCenter.on('refreshAddressLis', ()=> {
+      this.getAddressList();
+    })
+    this.getAddressList();
+  };
+
+  getAddressList() {
     Taro.showLoading({
       title: '加载中'
     })
     AddressApi.getAddressList({
       access_token: this.props.access_token
-    }).then((res)=> {
+    }).then((res) => {
       console.log('res', res)
       Taro.hideLoading()
       this.props.dispatch({
@@ -26,8 +33,9 @@ class index extends Component {
         }
       })
     })
-  };
-  // 添加地址
+  }
+
+// 添加地址
   addressUpdate = () => {
     this.props.dispatch({
       type: 'address/save',
