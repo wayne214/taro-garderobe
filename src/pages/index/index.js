@@ -154,7 +154,7 @@ class Index extends Component {
         {Taro.getEnv() === Taro.ENV_TYPE.WEAPP && <ad unit-id="adunit-dc1c0a38156fa412"></ad>}
 
         {
-          this.state.showFlag && <View className='recommend'>好物推荐</View>
+          this.state.showFlag && <View className='recommend'>好物推荐ww</View>
         }
         <GoodsList list={products_list} />
       </View>
